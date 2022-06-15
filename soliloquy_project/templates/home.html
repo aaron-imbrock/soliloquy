@@ -1,0 +1,11 @@
+<!-- templates/home.html-->
+{% extends "base.html" %}
+
+{% block content %}
+{% for day in dayview_list %}
+    <div class="day-entry">
+        <h2><a href="">{{ day.date_created }}</a></h2>
+        <p>{{ day.day_review }}</p>
+    </div>
+{% endfor %}
+{% endblock content %}
