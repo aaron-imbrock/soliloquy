@@ -30,7 +30,7 @@ class DayView(models.Model):
     day_review = models.TextField()
 
     def __str__(self):
-        return self.date_created
+        return str(self.date_created)
 
     def get_absolute_url(self):
         return reverse("day_detail", kwargs={"pk": self.pk})
