@@ -3,8 +3,6 @@ from django.urls import reverse
 
 import datetime
 
-# Create your models here.
-
 
 class DayView(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -38,22 +36,23 @@ class DayView(models.Model):
 
 class Task(models.Model):
     id = models.BigAutoField(primary_key=True)
-    text = models.CharField(max_length=60)
+    title = models.CharField(max_length=120, default='Create or Edit Task')
+    description = models.TextField(default="Insert Description")
     date_created = models.DateField(
         verbose_name="creation date", null=True, default=datetime.date.today
     )
-    date_complete = models.DateField(
-        verbose_name="creation date", null=True, default=datetime.date.today
+    date_completed = models.DateField(
+        verbose_name="completion date", null=True, default=datetime.date.today
     )
     author = models.ForeignKey(
         "auth.User",
         on_delete=models.CASCADE,
     )
     priority = models.IntegerField()
-    complete = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.text
+        return self.title
 
     def get_absolute_url(self):
         return reverse("todo", kwargs={"pk": self.pk})
